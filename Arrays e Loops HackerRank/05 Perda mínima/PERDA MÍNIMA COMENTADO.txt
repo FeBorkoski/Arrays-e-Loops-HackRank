@@ -1,0 +1,47 @@
+// Definição da função principal 'solucao' que encontra o menor prejuízo possível ao comprar e vender ações.
+function solucao(precos) {
+    let compra = 0; // Variável para armazenar o preço de compra.
+    let venda = 0; // Variável para armazenar o preço de venda.
+    let prejuizo = 0; // Variável para calcular o prejuízo.
+    let menorPrejuizo = precos[0]; // Inicializa a variável com o primeiro preço da lista.
+
+    // Loop externo: Itera sobre cada preço como preço de compra potencial.
+    for (let i = 0; i < precos.length; i++) {
+        // Loop interno: Itera sobre os preços seguintes como preços de venda potenciais.
+        for (let j = i + 1; j < precos.length; j++) {
+            compra = precos[i]; // Define o preço de compra.
+            venda = precos[j]; // Define o preço de venda.
+            prejuizo = compra - venda; // Calcula o prejuízo (compra - venda).
+
+            if (prejuizo > 0) { // Se o prejuízo for positivo (compra > venda), verifica se é o menor.
+                if (prejuizo < menorPrejuizo) {
+                    menorPrejuizo = prejuizo; // Atualiza o menor prejuízo se necessário.
+                }
+            }
+        }
+    }
+
+    console.log(menorPrejuizo); // Exibe o menor prejuízo possível.
+}
+
+// Função para processar a entrada.
+function processData(input) {
+    // Faz o parsing da entrada, separando os preços por espaço e convertendo-os para números inteiros.
+    const precos = input.split(" ").map(x => parseInt(x));
+    solucao(precos); // Chama a função 'solucao' passando os preços como argumento.
+}
+
+// Configuração para ler a entrada padrão.
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+
+// Evento para concatenar a entrada à variável '_input' conforme os dados são recebidos.
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+// Evento disparado quando a leitura da entrada é concluída.
+process.stdin.on("end", function () {
+   processData(_input); // Chama a função para processar a entrada completa.
+});

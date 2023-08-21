@@ -1,0 +1,35 @@
+// Definição da função principal 'solucao' que conta quantos caracteres de um palpite estão presentes em uma palavra.
+function solucao(palpite, palavra) {
+    let acertos = 0; // Inicializa a variável para contar os acertos.
+
+    // Itera sobre cada caractere na palavra.
+    for (let i = 0; i < palavra.length; i++) {
+        if (palavra[i] === palpite) { // Verifica se o caractere da palavra é igual ao palpite.
+            acertos++; // Se for igual, incrementa o contador de acertos.
+        }
+    }
+
+    console.log(acertos); // Exibe o número de acertos.
+}
+
+// Função para processar a entrada.
+function processData(input) {
+    // Faz o parsing da entrada, separando o palpite e a palavra, e chama a função 'solucao'.
+    const [palpite, palavra] = input.split(" ");
+    solucao(palpite, palavra);
+}
+
+// Configuração para ler a entrada padrão.
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+
+// Evento para concatenar a entrada à variável '_input' conforme os dados são recebidos.
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+// Evento disparado quando a leitura da entrada é concluída.
+process.stdin.on("end", function () {
+   processData(_input); // Chama a função para processar a entrada completa.
+});

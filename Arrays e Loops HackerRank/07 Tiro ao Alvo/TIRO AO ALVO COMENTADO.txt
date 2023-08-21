@@ -1,0 +1,38 @@
+// Definição da função principal 'solucao' que conta disparos acima de 70 e decide se um jogador é eliminado ou não.
+function solucao(disparos) {
+    let acimaDe70 = 0; // Inicializa uma variável para contar os disparos acima de 70.
+
+    // Itera sobre cada disparo na lista de disparos.
+    for (let disparo of disparos) {
+        if (disparo > 70) {
+            acimaDe70++; // Se o disparo for acima de 70, incrementa o contador.
+        }
+    }
+    
+    if (acimaDe70 > 2) {
+        console.log(acimaDe70); // Se houver mais de 2 disparos acima de 70, exibe o número deles.
+    } else {
+        console.log('ELIMINADO'); // Caso contrário, exibe 'ELIMINADO'.
+    }
+}
+
+// Função para processar a entrada.
+function processData(input) {
+    // Faz o parsing da entrada, separando os números por espaço, convertendo-os para números e filtrando zeros.
+    solucao(input.split(' ').map(x => Number(x)).filter(x => x));
+} 
+
+// Configuração para ler a entrada padrão.
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+
+// Evento para concatenar a entrada à variável '_input' conforme os dados são recebidos.
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+// Evento disparado quando a leitura da entrada é concluída.
+process.stdin.on("end", function () {
+   processData(_input); // Chama a função para processar a entrada completa.
+});

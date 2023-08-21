@@ -1,0 +1,41 @@
+// Definição da função principal 'solucao' que calcula a posição final após processar uma sequência.
+function solucao(sequencia) {
+    let contagem = 0; // Inicializa a contagem de movimentos.
+
+    // Itera sobre cada caractere na sequência.
+    for (let i = 0; i < sequencia.length; i++) {
+        if (sequencia[i] === '>') { // Se o caractere for '>', incrementa a contagem.
+            contagem++;
+            if (contagem > 6) { // Se a contagem exceder 6, redefine para 0.
+                contagem = 0;
+            }
+        } else { // Se o caractere não for '>', decrementa a contagem.
+            contagem--;
+            if (contagem < 0) { // Se a contagem for menor que 0, redefine para 6.
+                contagem = 6;
+            }
+        }
+    }
+
+    console.log(contagem); // Exibe a posição final após processar a sequência.
+}
+
+// Função para processar a entrada.
+function processData(input) {
+    solucao(input); // Chama a função 'solucao' para processar a entrada.
+}
+
+// Configuração para ler a entrada padrão.
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+
+// Evento para concatenar a entrada à variável '_input' conforme os dados são recebidos.
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+// Evento disparado quando a leitura da entrada é concluída.
+process.stdin.on("end", function () {
+   processData(_input); // Chama a função para processar a entrada completa.
+});

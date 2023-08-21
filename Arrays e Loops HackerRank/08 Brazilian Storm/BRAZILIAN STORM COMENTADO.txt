@@ -1,0 +1,51 @@
+// Definição da função principal 'solucao' que calcula a média das notas após remover as duas maiores e duas menores.
+function solucao(notas) {
+    let maior = 0; // Variável para armazenar o índice da maior nota.
+    let menor = 0; // Variável para armazenar o índice da menor nota.
+    let calc = 0; // Variável para acumular as notas a serem calculadas.
+
+    // Encontra os índices da maior e da menor nota.
+    for (let i = 0; i < notas.length; i++) {
+        if (notas[i] > notas[maior]) {
+            maior = i;
+        } else if (notas[i] < notas[menor]) {
+            menor = i;
+        }
+    }
+
+    // Determina os índices a serem removidos (os dois menores ou os dois maiores).
+    let primeiroIndiceRemover = Math.min(menor, maior);
+    let segundoIndiceRemover = Math.max(menor, maior);
+
+    // Remove as notas com os índices determinados.
+    notas.splice(segundoIndiceRemover, 1);
+    notas.splice(primeiroIndiceRemover, 1);
+
+    // Calcula a soma das notas restantes.
+    for (let calculo of notas) {
+        calc += calculo;
+    }
+
+    console.log(calc / notas.length); // Calcula e exibe a média das notas restantes.
+}
+
+// Função para processar a entrada.
+function processData(input) {
+    // Faz o parsing da entrada, remove espaços extras, converte para números inteiros e chama a função 'solucao'.
+    solucao(input.trim().split(" ").filter(x => x).map(x => parseInt(x, 10)));
+}
+
+// Configuração para ler a entrada padrão.
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+
+// Evento para concatenar a entrada à variável '_input' conforme os dados são recebidos.
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+// Evento disparado quando a leitura da entrada é concluída.
+process.stdin.on("end", function () {
+   processData(_input); // Chama a função para processar a entrada completa.
+});

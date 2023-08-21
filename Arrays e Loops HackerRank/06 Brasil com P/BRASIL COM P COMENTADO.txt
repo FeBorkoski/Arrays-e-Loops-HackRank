@@ -1,0 +1,42 @@
+// Definição da função principal 'solucao' que filtra palavras baseadas em duas letras iniciais.
+function solucao(primeiraLetra, segundaLetra, palavras) {
+    let lista = []; // Inicializa um array para armazenar as palavras que atendem aos critérios.
+
+    // Itera sobre cada palavra na lista de palavras.
+    for (let palavra of palavras) {
+        if (primeiraLetra === palavra[0] && segundaLetra === palavra[1]) {
+            // Verifica se a primeira letra da palavra é igual à primeiraLetra fornecida
+            // e se a segunda letra da palavra é igual à segundaLetra fornecida.
+            lista.push(palavra); // Se as condições forem atendidas, adiciona a palavra à lista.
+            console.log(palavra); // Exibe a palavra que atende aos critérios.
+        }
+    }
+
+    if (lista.length === 0) {
+        console.log('NENHUMA'); // Se nenhuma palavra atender aos critérios, exibe 'NENHUMA'.
+    }
+}
+
+// Função para processar a entrada.
+function processData(input) {
+    // Faz o parsing da entrada em JSON, obtendo a primeira letra, a segunda letra e a lista de palavras.
+    const { primeiraLetra, segundaLetra, palavras } = JSON.parse(input);
+    
+    // Chama a função 'solucao' passando as letras e a lista de palavras como argumentos.
+    solucao(primeiraLetra, segundaLetra, palavras);
+}
+
+// Configuração para ler a entrada padrão.
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+
+// Evento para concatenar a entrada à variável '_input' conforme os dados são recebidos.
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+// Evento disparado quando a leitura da entrada é concluída.
+process.stdin.on("end", function () {
+   processData(_input); // Chama a função para processar a entrada completa.
+});

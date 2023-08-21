@@ -1,0 +1,37 @@
+// Definição da função principal 'solucao' que calcula a pontuação total com base em uma lista de resultados.
+function solucao(resultados) {
+    let pontuacao = 0; // Inicializa a variável para armazenar a pontuação total.
+
+    // Itera sobre cada resultado na lista de resultados.
+    for (let placar of resultados) {
+        if (placar === 'V') { // Se o resultado for 'V' (vitória), adiciona 3 pontos à pontuação.
+            pontuacao += 3;
+        } else if (placar === 'E') { // Se o resultado for 'E' (empate), adiciona 1 ponto à pontuação.
+            pontuacao++;
+        }
+    }
+
+    console.log(pontuacao); // Exibe a pontuação total.
+}
+
+// Função para processar a entrada.
+function processData(input) {
+    // Faz o parsing da entrada em JSON, obtendo a lista de resultados, e chama a função 'solucao'.
+    const resultados = JSON.parse(input);
+    solucao(resultados);
+}
+
+// Configuração para ler a entrada padrão.
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+
+// Evento para concatenar a entrada à variável '_input' conforme os dados são recebidos.
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+// Evento disparado quando a leitura da entrada é concluída.
+process.stdin.on("end", function () {
+   processData(_input); // Chama a função para processar a entrada completa.
+});

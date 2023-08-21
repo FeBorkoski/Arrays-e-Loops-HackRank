@@ -1,0 +1,45 @@
+// Definição da função principal solucao que calcula o valor total dos preços e aplica desconto se houver mais de 5 preços.
+function solucao(precos) {
+    let soma = 0; // Inicializa a variável para armazenar a soma dos preços.
+    
+    // Itera sobre cada preço na lista de preços.
+    for (let preco of precos) {
+        soma += preco; // Adiciona o preço atual à soma.
+    }
+    
+    if (precos.length >= 5) {
+        let menos = precos[0]; // Inicializa a variável para armazenar o menor preço.
+        
+        // Itera sobre cada item na lista de preços para encontrar o menor preço.
+        for (let item of precos) {
+            if (item < menos) {
+                menos = item; // Atualiza o valor de 'menos' se um preço menor for encontrado.
+            }
+        }
+        
+        console.log(soma - menos); // Exibe o total dos preços com desconto do menor preço.
+    } else {
+        console.log(soma); // Se não houver mais de 5 preços, exibe o total sem desconto.
+    }
+}
+
+// Função para processar a entrada.
+function processData(input) {
+    // Faz o parsing da entrada, remove espaços extras, converte para números inteiros e chama a função solucao.
+    solucao(input.trim().split(" ").filter(x => x).map(x => parseInt(x, 10)));
+}
+
+// Configuração para ler a entrada padrão.
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+
+// Evento para concatenar a entrada à variável _input conforme os dados são recebidos.
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+// Evento disparado quando a leitura da entrada é concluída.
+process.stdin.on("end", function () {
+   processData(_input); // Chama a função para processar a entrada completa.
+});

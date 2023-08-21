@@ -1,0 +1,38 @@
+// Definição da função principal solucao que conta quantas palavras não começam com a letra especificada.
+function solucao(letra, palavras) {
+    let erros = 0; // Inicializa uma variável para contar o número de palavras que não começam com a letra especificada.
+    
+    // Itera sobre cada palavra na lista de palavras.
+    for (let palavra of palavras) {
+        const pLetra = palavra[0]; // Obtém a primeira letra da palavra.
+        if (pLetra !== letra) {
+            erros++; // Se a primeira letra da palavra não for igual à letra especificada, incrementa o contador de erros.
+        }
+    }
+    
+    console.log(erros); // Exibe o número total de palavras que não começam com a letra especificada.
+}
+
+// Função para processar a entrada.
+function processData(input) {
+    // Faz o parsing da entrada em JSON, obtendo a letra e a lista de palavras.
+    const { letra, palavras } = JSON.parse(input)[0];
+    
+    // Chama a função solucao passando a letra e a lista de palavras como argumentos.
+    solucao(letra, palavras);
+}
+
+// Configuração para ler a entrada padrão.
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+
+// Evento para concatenar a entrada à variável _input conforme os dados são recebidos.
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+// Evento disparado quando a leitura da entrada é concluída.
+process.stdin.on("end", function () {
+   processData(_input); // Chama a função para processar a entrada completa.
+});
